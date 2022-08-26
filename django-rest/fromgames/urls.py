@@ -27,5 +27,6 @@ route.register(r'companies',gameviewsets.CompanyViewSet, basename="Company")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include(route.urls))
+    path('',include(route.urls)),
+    path('list_category_games/<int:pk>', gameviewsets.ListGamesByCategoryViewSet.as_view(), name='categoy__id')
 ]

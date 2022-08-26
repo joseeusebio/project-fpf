@@ -1,12 +1,10 @@
-from distutils.command.upload import upload
-from tabnanny import verbose
-import uuid
 from django.db import models
 from djmoney.models.fields import MoneyField
+from django.urls import reverse
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=60, primary_key=True)
+    name = models.CharField(max_length=60, unique=True)
     created_at = models.DateField(auto_now_add=True, blank=True)
 
     def __str__(self) -> str:
@@ -16,7 +14,7 @@ class Category(models.Model):
         verbose_name_plural = 'Categories'
 
 class Company(models.Model):
-    name = models.CharField(max_length=90, primary_key=True)
+    name = models.CharField(max_length=90, unique=True)
     created_at = models.DateField(auto_now_add=True)
 
     def __str__(self) -> str:
@@ -27,8 +25,8 @@ class Company(models.Model):
 
 
 class Game(models.Model):
-    id_game = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=60, blank=False)
+    slug = models.SlugField(max_length=250, unique=True)
     description = models.TextField(max_length=250, default="vazio", blank=True)
     release_date = models.DateField()
     created_at = models.DateField(auto_now_add=True)
@@ -40,3 +38,15 @@ class Game(models.Model):
 
     class Meta:
         ordering = ('-release_date','price',)
+
+
+    def __str__(self) -> str:
+        return self.title
+
+
+    def get_absolute_url(self):
+        return reverse('game_detail',
+                args=[str(self.id)])
+
+
+    

@@ -1,0 +1,5 @@
+https://github.com/eduardo-monita/django-rest-api
+
+https://www.django-rest-framework.org/api-guide/filtering/ - filtering django
+
+https://pythonacademy.com.br/blog/filtros-busca-e-ordenacao-no-drf
