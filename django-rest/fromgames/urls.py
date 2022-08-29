@@ -24,9 +24,10 @@ route = routers.DefaultRouter()
 route.register(r'games',gameviewsets.GameViewSet, basename="Game")
 route.register(r'categories',gameviewsets.CategoryViewSet, basename="Category")
 route.register(r'companies',gameviewsets.CompanyViewSet, basename="Company")
+# route.register(r'list_category_games',gameviewsets.ListGamesByCategoryViewSet, basename="ListCategoryGames")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include(route.urls)),
-    path('list_category_games/<int:pk>', gameviewsets.ListGamesByCategoryViewSet.as_view(), name='categoy__id')
+    # path('list_category_games/<int:pk>', gameviewsets.ListGamesByCategoryViewSet.as_view(), name='category__id')
 ]

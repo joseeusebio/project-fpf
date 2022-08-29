@@ -25,7 +25,7 @@ class Company(models.Model):
 
 
 class Game(models.Model):
-    title = models.CharField(max_length=60, blank=False)
+    title = models.CharField(max_length=60, blank=False, unique=True)
     slug = models.SlugField(max_length=250, unique=True)
     description = models.TextField(max_length=250, default="vazio", blank=True)
     release_date = models.DateField()
@@ -37,16 +37,21 @@ class Game(models.Model):
     picture = models.ImageField(upload_to='pictures_games/', blank=True)
 
     class Meta:
-        ordering = ('-release_date','price',)
+        ordering = ('id',)
 
 
     def __str__(self) -> str:
         return self.title
 
+    def save(self, force_insert=False, force_update=False):
+        self.category = self.category.lower()
+        self.company = self.company.lower()
+        super(Game, self).save(force_insert, force_update)
 
-    def get_absolute_url(self):
-        return reverse('game_detail',
-                args=[str(self.id)])
+
+    # def get_absolute_url(self):
+    #     return reverse('game_detail',
+    #             args=[str(self.id)])
 
 
     
