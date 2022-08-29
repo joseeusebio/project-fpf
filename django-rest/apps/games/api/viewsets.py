@@ -1,43 +1,31 @@
-from rest_framework import viewsets, permissions, generics
+from urllib import request
+from rest_framework import viewsets, permissions
 from games import models
 from games.api import serializers
 from rest_framework.authentication import BasicAuthentication
-from rest_framework.permissions import IsAuthenticated
 from django_filters.rest_framework import DjangoFilterBackend
 
-class GameViewSet(viewsets.ModelViewSet):
-    serializer_class = serializers.GameSerializer
-    queryset = models.Game.objects.all()
-    authentication_classes = [BasicAuthentication]
-    permission_classes = [IsAuthenticated]
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['title','category__name','company__name']
-
-
 class CategoryViewSet(viewsets.ModelViewSet):
-    serializer_class = serializers.CategorySerializer
     queryset = models.Category.objects.all()
+    serializer_class = serializers.CategorySerializer
+    permission_classes = [permissions.IsAdminUser, permissions.IsAuthenticatedOrReadOnly]
     authentication_classes = [BasicAuthentication]
-    permission_classes = [IsAuthenticated]
+    filter_backends = [DjangoFilterBackend]
+    search_fields = ['name']
     
 
 class CompanyViewSet(viewsets.ModelViewSet):
-    serializer_class = serializers.CompanySerializer
     queryset = models.Company.objects.all()
+    serializer_class = serializers.CompanySerializer
+    permission_classes = [permissions.IsAdminUser, permissions.IsAuthenticatedOrReadOnly]
     authentication_classes = [BasicAuthentication]
-    permission_classes = [IsAuthenticated]
-
-
-# class ListGamesByCategoryViewSet(viewsets.ModelViewSet):
-#     """Listando os games por categoria"""
-#     queryset = models.Game.objects.all()
-#     serializer_class = serializers.ListGamesByCategorySerializer
-#     authentication_classes = [BasicAuthentication]
-#     permission_classes = [IsAuthenticated]
-#     filter_backends = [DjangoFilterBackend]
-#     filterset_fields = ['category__name']
-    
-    # def get_queryset(self):
-    #     query_set = models.Game.objects.filter(category=self.kwargs['pk'])
-    #     return query_set
+    filter_backends = [DjangoFilterBackend]
+    search_fields = ['name']
         
+class GameViewSet(viewsets.ModelViewSet):
+    queryset = models.Game.objects.all()
+    serializer_class = serializers.GameSerializer
+    permission_classes = [permissions.IsAdminUser, permissions.IsAuthenticatedOrReadOnly]
+    authentication_classes = [BasicAuthentication]
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['title','category__name','company__name']

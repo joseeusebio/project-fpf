@@ -13,15 +13,11 @@ class CompanySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class GameSerializer(serializers.ModelSerializer):
-    # category = CategorySerializer(read_only=False)
-    # company = CompanySerializer(read_only=False)
+    category = CategorySerializer(many=True)
+    company = CompanySerializer(many=True)
     class Meta:
         model = models.Game
-        fields = '__all__'
-
-# class ListGamesByCategorySerializer(serializers.ModelSerializer):
-#     category = CategorySerializer(read_only=True)
-#     company = CompanySerializer(read_only=True)
-#     class Meta:
-#         model = models.Game
-#         fields = ['id','title','description','release_date','price','category','company']
+        fields = (
+            'id', 'title', 'slug', 'description', 'release_date', 'category', 'company', 'price',
+            'quantity', 'is_activate', 'picture'
+        )
