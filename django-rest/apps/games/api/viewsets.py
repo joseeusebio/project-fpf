@@ -1,4 +1,3 @@
-from urllib import request
 from rest_framework import viewsets, permissions
 from games import models
 from games.api import serializers
@@ -11,7 +10,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAdminUser, permissions.IsAuthenticatedOrReadOnly]
     authentication_classes = [BasicAuthentication]
     filter_backends = [DjangoFilterBackend]
-    search_fields = ['name']
+    filterset_fields = ['name']
     
 
 class CompanyViewSet(viewsets.ModelViewSet):
@@ -20,7 +19,7 @@ class CompanyViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAdminUser, permissions.IsAuthenticatedOrReadOnly]
     authentication_classes = [BasicAuthentication]
     filter_backends = [DjangoFilterBackend]
-    search_fields = ['name']
+    filterset_fields = ['name']
         
 class GameViewSet(viewsets.ModelViewSet):
     queryset = models.Game.objects.all()

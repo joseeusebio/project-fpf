@@ -40,12 +40,12 @@ class Game(models.Model):
     release_date = models.DateField()
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
-    category = models.ManyToManyField(Category)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     price = MoneyField(max_digits=5, decimal_places=2, default_currency='BRL')
     quantity = models.PositiveIntegerField()
     is_activate = models.BooleanField(default=True)
-    picture = models.ImageField(upload_to='pictures_games/', blank=True)
+    picture = models.ImageField(upload_to='pictures_games/', null=True)
 
     class Meta:
         ordering = ('id',)
@@ -55,13 +55,10 @@ class Game(models.Model):
 
     def save(self, *args, **kwargs):
         self.title = self.title.lower()
-        self.category = self.category.lower()
-        self.company = self.company.lower()
         return super(Game, self).save(*args, **kwargs)
 
     def get_categories(self):
         return ",".join([str(i) for i in self.category.all()])
-
 
     # def get_absolute_url(self):
     #     return reverse('game_detail',
