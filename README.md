@@ -45,6 +45,7 @@
 ```
 
 ```Category
+    {
         "name": "string"
     }
 ```
