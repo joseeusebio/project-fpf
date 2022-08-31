@@ -57,8 +57,8 @@ class Game(models.Model):
         self.title = self.title.lower()
         return super(Game, self).save(*args, **kwargs)
 
-    def get_categories(self):
-        return ",".join([str(i) for i in self.category.all()])
+    # def get_categories(self):
+    #     return ",".join([str(i) for i in self.category.all()])
 
     # def get_absolute_url(self):
     #     return reverse('game_detail',

@@ -29,28 +29,30 @@
 
 # JSON Model - Post
 
-**Games**
+```Games
     {
-        "title": "",
-        "slug": "",
-        "description": "",
-        "release_date": null,
-        "category": null,
-        "company": null,
-        "price": null,
-        "quantity": null,
-        "is_activate": false,
+        "title": "string",
+        "slug": "string",
+        "description": "string",
+        "release_date": date,
+        "category": id,
+        "company": id,
+        "price": double,
+        "quantity": int,
+        "is_activate": boolean,
         "picture": null
     }
+```
 
-**Category**
-    {
-        "name": ""
+```Category
+        "name": "string"
     }
+```
 
-**Company**
+
+```Company
     {
-        "name": ""
+        "name": "string"
     }
-
+```
     

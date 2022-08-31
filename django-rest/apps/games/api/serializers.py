@@ -36,7 +36,7 @@ class CompanySerializer(serializers.ModelSerializer):
         return super().create(validated_data)
 
 class GameSerializer(serializers.ModelSerializer):
-    category = serializers.PrimaryKeyRelatedField(queryset=models.Category.objects.all(), source='category.id')
+    # category = serializers.PrimaryKeyRelatedField(queryset=models.Category.objects.all(), source='category.id')
     # company = serializers.PrimaryKeyRelatedField(queryset=models.Company.objects.all(), source='company.id')
     class Meta:
         model = models.Game
@@ -44,3 +44,14 @@ class GameSerializer(serializers.ModelSerializer):
             'id', 'title', 'slug', 'description', 'release_date', 'category', 'company', 'price',
             'quantity', 'is_activate', 'picture'
         )
+
+    def create(self, validated_data):
+        title = validated_data['title'].lower()
+        try:
+            models.Game.objects.get(name=title)
+        except ObjectDoesNotExist:
+            pass
+        else:
+            raise serializers.ValidationError(f'This game {title} already exists')
+
+        return super().create(validated_data)
