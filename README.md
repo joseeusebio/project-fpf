@@ -35,7 +35,7 @@
         "title": "string",
         "slug": "string",
         "description": "string",
-        "release_date": "YYYY/MM/DD",
+        "release_date": "YYYY-MM-DD",
         "category": 0,
         "company": 0,
         "price": 0,
