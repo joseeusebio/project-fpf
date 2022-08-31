@@ -35,12 +35,12 @@
         "title": "string",
         "slug": "string",
         "description": "string",
-        "release_date": date,
-        "category": id,
-        "company": id,
-        "price": double,
-        "quantity": int,
-        "is_activate": boolean,
+        "release_date": "YYYY/MM/DD",
+        "category": 0,
+        "company": 0,
+        "price": 0,
+        "quantity": 0,
+        "is_activate": false,
         "picture": null
     }
 ```
