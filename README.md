@@ -29,7 +29,8 @@
 
 # JSON Model - Post
 
-```Games
+## Game
+```JSON
     {
         "title": "string",
         "slug": "string",
@@ -43,15 +44,15 @@
         "picture": null
     }
 ```
-
-```Category
+## Category
+```JSON
     {
         "name": "string"
     }
 ```
 
-
-```Company
+## Company
+```JSON
     {
         "name": "string"
     }
