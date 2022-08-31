@@ -48,7 +48,7 @@ class GameSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         title = validated_data['title'].lower()
         try:
-            models.Game.objects.get(name=title)
+            models.Game.objects.get(title=title)
         except ObjectDoesNotExist:
             pass
         else:
