@@ -14,6 +14,7 @@ import os
 import sys
 from decouple import config, Csv
 from dj_database_url import parse as dburl
+import django_heroku
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -135,3 +136,5 @@ sys.path.insert(1, os.path.join(PROJECT_ROOT, '../apps'))
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+django_heroku.settings(locals())
