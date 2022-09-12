@@ -1,1 +1,1 @@
-web: gunicorn fromgames:app
+web: gunicorn fromgames.wsgi
