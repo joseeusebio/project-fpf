@@ -1,1 +1,1 @@
-web: gunicorn fromgames.wsgi
+web: gunicorn django-rest/fromgames.wsgi
